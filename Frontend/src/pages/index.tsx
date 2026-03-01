@@ -1,12 +1,11 @@
-import { Button } from "@/components/ui/button";
+import DashboardSection from "@/components/dashboard";
+import Layout from "@/components/Layout";
 
 const Home = () => {
   return (
-    <div className="bg-red-500">
-      <div className="flex min-h-svh flex-col items-center justify-center">
-        <Button>Click me</Button>
-      </div>
-    </div>
+    <Layout>
+      <DashboardSection />
+    </Layout>
   );
 };
 
