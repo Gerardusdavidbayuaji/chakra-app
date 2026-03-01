@@ -1,12 +1,12 @@
+import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 import { navigationItems } from "@/utils/layout/navigation";
 import { LogOut } from "lucide-react";
 import { cn } from "@/utils/utils";
 
 const Sidebar = () => {
-  const [activeItem, setActiveItem] = useState(0);
+  const location = useLocation();
 
   return (
     <aside className="w-64 bg-white border-r border-gray-200 flex flex-col">
@@ -24,14 +24,13 @@ const Sidebar = () => {
 
       <nav className="flex-1 p-4">
         <ul className="space-y-2">
-          {navigationItems.map((item, index) => (
+          {navigationItems.map((item) => (
             <li key={item.label}>
               <Link
                 to={item.href}
-                onClick={() => setActiveItem(index)}
                 className={cn(
                   "flex items-center gap-3 px-4 py-3 rounded-lg font-medium text-xs transition-all",
-                  activeItem === index
+                  location.pathname === item.href
                     ? "bg-blue-500 text-white"
                     : "text-gray-700 hover:bg-gray-100",
                 )}
