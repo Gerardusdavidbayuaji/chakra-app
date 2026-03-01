@@ -1,5 +1,7 @@
 const PremiumPlanSection = () => {
-  return <div className="bg-red-800 h-full w-full">PremiumPlanSection</div>;
+  return (
+    <section className="bg-red-500 h-full w-full">PremiumPlanSection</section>
+  );
 };
 
 export default PremiumPlanSection;

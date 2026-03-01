@@ -1,5 +1,7 @@
 const CustomersSection = () => {
-  return <div className="bg-red-600 h-full w-full">CustomersSection</div>;
+  return (
+    <section className="bg-red-500 h-full w-full">CustomersSection</section>
+  );
 };
 
 export default CustomersSection;

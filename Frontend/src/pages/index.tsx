@@ -1,12 +1,12 @@
-import DashboardSection from "@/components/dashboard";
+import HomeSection from "@/components/home";
 import Layout from "@/components/Layout";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <Layout>
-      <DashboardSection />
+      <HomeSection />
     </Layout>
   );
 };
 
-export default Home;
+export default HomePage;

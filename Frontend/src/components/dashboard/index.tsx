@@ -1,5 +1,7 @@
 const DashboardSection = () => {
-  return <div className="bg-red-500 h-full w-full">DashboardSection</div>;
+  return (
+    <section className="bg-red-500 h-full w-full">DashboardSection</section>
+  );
 };
 
 export default DashboardSection;
