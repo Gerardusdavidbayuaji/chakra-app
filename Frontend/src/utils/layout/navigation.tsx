@@ -1,12 +1,5 @@
 import type { INavigationItem } from ".";
-import {
-  LayoutDashboard,
-  CreditCard,
-  BarChart3,
-  FileText,
-  Users,
-  Home,
-} from "lucide-react";
+import { LayoutDashboard, CreditCard, FileText, Home } from "lucide-react";
 
 export const navigationItems: INavigationItem[] = [
   { icon: <Home className="w-4 h-4" />, label: "Home", href: "/" },
@@ -21,18 +14,8 @@ export const navigationItems: INavigationItem[] = [
     href: "/premium-plan",
   },
   {
-    icon: <Users className="w-4 h-4" />,
-    label: "Customers",
-    href: "/customers",
-  },
-  {
     icon: <FileText className="w-4 h-4" />,
     label: "Installments",
     href: "/installments",
-  },
-  {
-    icon: <BarChart3 className="w-4 h-4" />,
-    label: "Reports",
-    href: "/reports",
   },
 ];
