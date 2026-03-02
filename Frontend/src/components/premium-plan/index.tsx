@@ -1,6 +1,12 @@
+import CustomerTable from "./CustomerTable";
+import PremiumCard from "./PremiumCard";
+
 const PremiumPlanSection = () => {
   return (
-    <section className="bg-red-500 h-full w-full">PremiumPlanSection</section>
+    <section className="h-full w-full flex flex-col gap-3">
+      <PremiumCard />
+      <CustomerTable />
+    </section>
   );
 };
 
