@@ -27,7 +27,7 @@ export default function Routes() {
       element: <PremiumPlanPage />,
     },
     {
-      path: "/customers",
+      path: "/premium-plan/:planId",
       element: <CustomersPage />,
     },
     {
