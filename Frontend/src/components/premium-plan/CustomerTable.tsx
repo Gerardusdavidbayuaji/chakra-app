@@ -137,7 +137,7 @@ const CustomerTable = () => {
               </TableCell>
               <TableCell>
                 <div className="flex items-center gap-2">
-                  <Link to="/premium-plan/:planId">
+                  <Link to="/installments">
                     <button className="text-sm font-semibold text-blue-500 hover:text-blue-600 transition-colors cursor-pointer bg-blue-100 p-1 rounded">
                       <SquarePen size={16} />
                     </button>
