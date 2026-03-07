@@ -1,38 +1,70 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import ProtectedRoute from "@/routes/ProtectedRoute";
+import { AuthProvider } from "@/utils/context/AuthContext";
+
 import InstallmentsPage from "@/pages/installments";
 import PremiumPlanPage from "@/pages/premium-plan";
 import CustomersPage from "@/pages/customers";
-import DashboardPage from "@/pages/dashboard";
 import ReportsPage from "@/pages/reports";
 import NotFound from "@/pages/not-found";
+import AdminPage from "@/pages/admin";
+import AuthPage from "@/pages/auth";
 import HomePage from "@/pages";
 
 export default function Routes() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <HomePage />,
+      element: (
+        <ProtectedRoute allowedRoles={["user"]}>
+          <HomePage />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/auth",
+      element: <AuthPage />,
     },
     {
       path: "/dashboard",
-      element: <DashboardPage />,
+      element: (
+        <ProtectedRoute allowedRoles={["admin"]}>
+          <AdminPage />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/installments",
-      element: <InstallmentsPage />,
+      element: (
+        <ProtectedRoute allowedRoles={["admin"]}>
+          <InstallmentsPage />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/premium-plan",
-      element: <PremiumPlanPage />,
+      element: (
+        <ProtectedRoute allowedRoles={["admin"]}>
+          <PremiumPlanPage />
+        </ProtectedRoute>
+      ),
     },
     {
-      path: "/customers",
-      element: <CustomersPage />,
+      path: "/premium-plan/:planId",
+      element: (
+        <ProtectedRoute allowedRoles={["admin"]}>
+          <CustomersPage />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/reports",
-      element: <ReportsPage />,
+      element: (
+        <ProtectedRoute allowedRoles={["admin"]}>
+          <ReportsPage />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "*",
@@ -40,5 +72,9 @@ export default function Routes() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
