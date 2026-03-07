@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import ProtectedRoute from "@/routes/ProtectedRoute";
-import { AuthProvider } from "@/context/AuthContext";
+import { AuthProvider } from "@/utils/context/AuthContext";
 
 import InstallmentsPage from "@/pages/installments";
 import PremiumPlanPage from "@/pages/premium-plan";

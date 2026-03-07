@@ -2,10 +2,9 @@ import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { navigationItems } from "@/utils/layout/navigation";
+import { useAuth } from "@/utils/context/AuthContext";
 import { LogOut } from "lucide-react";
 import { cn } from "@/utils/utils";
-
-import { useAuth } from "@/context/AuthContext";
 
 const Sidebar = () => {
   const location = useLocation();
