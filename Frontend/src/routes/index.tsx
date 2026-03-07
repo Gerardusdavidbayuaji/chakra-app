@@ -3,9 +3,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import InstallmentsPage from "@/pages/installments";
 import PremiumPlanPage from "@/pages/premium-plan";
 import CustomersPage from "@/pages/customers";
-import DashboardPage from "@/pages/dashboard";
 import ReportsPage from "@/pages/reports";
 import NotFound from "@/pages/not-found";
+import AdminPage from "@/pages/admin";
 import HomePage from "@/pages";
 
 export default function Routes() {
@@ -16,7 +16,7 @@ export default function Routes() {
     },
     {
       path: "/dashboard",
-      element: <DashboardPage />,
+      element: <AdminPage />,
     },
     {
       path: "/installments",

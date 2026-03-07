@@ -1,5 +1,5 @@
 import type { IPaymentItem } from "./type";
-import { paymentItems } from "./datas";
+import { paymentItems } from "./sample-data";
 
 export type { IPaymentItem };
 export { paymentItems };

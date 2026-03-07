@@ -1,6 +1,8 @@
 import { Calendar, CheckCircle2, Lock } from "lucide-react";
-import type { IPaymentItem } from "@/utils/apis/home";
 import { Button } from "../ui/button";
+
+import { formatDate, formatCurrency } from "@/utils/formatter";
+import type { IPaymentItem } from "@/utils/apis/home";
 
 const PaymentItemCard = ({ payment }: { payment: IPaymentItem }) => {
   const isCompleted = payment.status === "complated";
@@ -39,10 +41,12 @@ const PaymentItemCard = ({ payment }: { payment: IPaymentItem }) => {
             <div className="mb-4 flex items-start justify-between">
               <div>
                 <h3 className="font-semibold text-gray-900">{payment.month}</h3>
-                <p className="text-sm text-gray-500">{payment.date}</p>
+                <p className="text-sm text-gray-500">
+                  {formatDate(payment.date)}
+                </p>
               </div>
               <span className="font-semibold text-gray-900">
-                ${payment.amount.toFixed(2)}
+                {formatCurrency(payment.amount)}
               </span>
             </div>
             <Button className="w-full bg-cyan-500 hover:bg-cyan-600 text-white">
@@ -57,11 +61,13 @@ const PaymentItemCard = ({ payment }: { payment: IPaymentItem }) => {
               >
                 {payment.month}
               </h3>
-              <p className="text-sm text-gray-500">{payment.date}</p>
+              <p className="text-sm text-gray-500">
+                {formatDate(payment.date)}
+              </p>
             </div>
             <div className="text-right">
               <p className="font-semibold text-gray-900">
-                ${payment.amount.toFixed(2)}
+                {formatCurrency(payment.amount)}
               </p>
               <p
                 className={`text-xs font-semibold uppercase ${

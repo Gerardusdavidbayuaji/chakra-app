@@ -9,11 +9,13 @@ import {
   TableCell,
 } from "@/components/ui/table";
 
+import { formatDate, formatCurrency } from "@/utils/formatter";
+
 interface Payment {
   id: string;
   installment: string;
   dueDate: string;
-  amount: string;
+  amount: number;
   status: "Paid" | "Overdue" | "Pending";
   paidDate?: string;
   reminder: number;
@@ -23,98 +25,98 @@ const payments: Payment[] = [
   {
     id: "1",
     installment: "#001",
-    dueDate: "Oct 12, 2023",
-    amount: "$1,050.00",
+    dueDate: "2023-10-12",
+    amount: 1050,
     status: "Paid",
-    paidDate: "Oct 11, 2023",
+    paidDate: "2023-10-11",
     reminder: 1,
   },
   {
     id: "2",
     installment: "#002",
-    dueDate: "Nov 12, 2023",
-    amount: "$1,050.00",
+    dueDate: "2023-11-12",
+    amount: 1050,
     status: "Paid",
-    paidDate: "Nov 12, 2023",
+    paidDate: "2023-11-12",
     reminder: 1,
   },
   {
     id: "3",
     installment: "#003",
-    dueDate: "Dec 12, 2023",
-    amount: "$1,050.00",
+    dueDate: "2023-12-12",
+    amount: 1050,
     status: "Overdue",
     reminder: 3,
   },
   {
     id: "4",
     installment: "#004",
-    dueDate: "Jan 12, 2024",
-    amount: "$1,050.00",
+    dueDate: "2024-01-12",
+    amount: 1050,
     status: "Pending",
     reminder: 0,
   },
   {
     id: "5",
     installment: "#005",
-    dueDate: "Feb 12, 2024",
-    amount: "$1,050.00",
+    dueDate: "2024-02-12",
+    amount: 1050,
     status: "Pending",
     reminder: 0,
   },
   {
     id: "6",
     installment: "#006",
-    dueDate: "Mar 12, 2024",
-    amount: "$1,050.00",
+    dueDate: "2024-03-12",
+    amount: 1050,
     status: "Pending",
     reminder: 0,
   },
   {
     id: "7",
     installment: "#007",
-    dueDate: "Apr 12, 2024",
-    amount: "$1,050.00",
+    dueDate: "2024-04-12",
+    amount: 1050,
     status: "Pending",
     reminder: 0,
   },
   {
     id: "8",
     installment: "#008",
-    dueDate: "May 12, 2024",
-    amount: "$1,050.00",
+    dueDate: "2024-05-12",
+    amount: 1050,
     status: "Pending",
     reminder: 0,
   },
   {
     id: "9",
     installment: "#009",
-    dueDate: "Jun 12, 2024",
-    amount: "$1,050.00",
+    dueDate: "2024-06-12",
+    amount: 1050,
     status: "Pending",
     reminder: 0,
   },
   {
     id: "10",
     installment: "#010",
-    dueDate: "Jul 12, 2024",
-    amount: "$1,050.00",
+    dueDate: "2024-07-12",
+    amount: 1050,
     status: "Pending",
     reminder: 0,
   },
   {
     id: "11",
     installment: "#011",
-    dueDate: "Aug 12, 2024",
-    amount: "$1,050.00",
+    dueDate: "2024-08-12",
+    amount: 1050,
     status: "Pending",
     reminder: 0,
   },
   {
     id: "12",
     installment: "#012",
-    dueDate: "Sep 12, 2024",
-    amount: "$1,050.00",
+    dueDate: "2024-09-12",
+    amount: 1050,
     status: "Pending",
     reminder: 0,
   },
@@ -166,9 +168,9 @@ const PaymentScheduleTable = () => {
                 <TableCell className="font-semibold">
                   {payment.installment}
                 </TableCell>
-                <TableCell>{payment.dueDate}</TableCell>
+                <TableCell>{formatDate(payment.dueDate)}</TableCell>
                 <TableCell className="font-semibold">
-                  {payment.amount}
+                  {formatCurrency(payment.amount)}
                 </TableCell>
                 <TableCell>
                   <Badge
@@ -177,7 +179,7 @@ const PaymentScheduleTable = () => {
                     {payment.status}
                   </Badge>
                 </TableCell>
-                <TableCell>{payment.paidDate || "-"}</TableCell>
+                <TableCell>{formatDate(payment.paidDate as string)}</TableCell>
                 <TableCell>{payment.reminder}</TableCell>
               </TableRow>
             ))}
