@@ -1,5 +1,5 @@
-import type { IMetricCard } from "./type";
-import { metrics } from "./sample-data";
+import type { IMetricCard, ICustomer } from "./type";
+import { metrics, customers } from "./sample-data";
 
-export type { IMetricCard };
-export { metrics };
+export type { IMetricCard, ICustomer };
+export { metrics, customers };
