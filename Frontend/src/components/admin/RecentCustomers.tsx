@@ -13,46 +13,11 @@ import { Link } from "react-router-dom";
 
 import { formatCurrency } from "@/utils/formatter";
 
-interface Customer {
-  id: number;
-  name: string;
-  email: string;
-  plan: string;
-  amount: number;
-  progress: number;
-  duration: string;
-  status: "ACTIVE" | "INACTIVE";
-  avatar: string;
-}
-
-const customers: Customer[] = [
-  {
-    id: 1,
-    name: "Andi Saputra",
-    email: "andi.saputra@mail.com",
-    plan: "Enterprise Suite",
-    amount: 210000000,
-    progress: 42,
-    duration: "5/12",
-    status: "ACTIVE",
-    avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    id: 2,
-    name: "Budi Santoso",
-    email: "budi.santoso@mail.com",
-    plan: "Standard Business",
-    amount: 75500000,
-    progress: 67,
-    duration: "8/12",
-    status: "ACTIVE",
-    avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-];
+import { customers } from "@/utils/apis/admin";
+import type { ICustomer } from "@/utils/apis/admin";
 
 const RecentCustomers = () => {
+  const customerList: ICustomer[] = customers;
   return (
     <Card className="p-3 bg-white">
       <div className="flex items-center justify-between">
@@ -85,7 +50,7 @@ const RecentCustomers = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {customers.map((customer) => (
+          {customerList.map((customer) => (
             <TableRow key={customer.id}>
               <TableCell>
                 <div className="flex items-center gap-3">
