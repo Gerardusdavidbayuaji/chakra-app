@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ChakraApp.Infrastructure/ChakraApp.Infrastructure.csproj" />
+  <Project Path="ChakraApp.Application/ChakraApp.Application.csproj" />
+  <Project Path="ChakraApp.Domain/ChakraApp.Domain.csproj" />
+  <Project Path="ChakraApp.API/ChakraApp.API.csproj" />
+</Solution>

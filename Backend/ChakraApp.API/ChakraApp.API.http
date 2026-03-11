@@ -1,0 +1,6 @@
+@ChakraApp.API_HostAddress = http://localhost:5277
+
+GET {{ChakraApp.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
