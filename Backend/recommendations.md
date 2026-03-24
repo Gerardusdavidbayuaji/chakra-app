@@ -123,6 +123,8 @@ Gunakan RESTful API yang terdokumentasi dengan Swagger.
 
 - **My Payments**: `GET /api/user/installments` - Melihat daftar cicilan milik user yang sedang login.
 - **Payment Action**: `POST /api/user/installments/{id}/pay` - Generate Midtrans Snap Token untuk cicilan tertentu.
+- **Create User**: `POST /api/user` - Mendaftarkan user baru ke sistem.
+- **Update User**: `PUT /api/user/{id}` - Memperbarui data profil user berdasarkan ID.
 
 ### 💳 Integration (`Midtrans`)
 

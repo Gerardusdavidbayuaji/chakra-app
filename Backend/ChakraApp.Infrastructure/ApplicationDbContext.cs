@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ChakraApp.Domain.Entities.Enums;
 
 namespace  ChakraApp.Infrastruture.ApplicationDbContext;
 
@@ -7,7 +8,8 @@ public class ApplicationDbContext : DbContext
     public ApplicationDbContext(DbContextOptions options) : base(options)
     {
     } 
-    //public DbSet<Premi> Premis {get; set;}
+    
+    public DbSet<User> Users {get; set;}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
