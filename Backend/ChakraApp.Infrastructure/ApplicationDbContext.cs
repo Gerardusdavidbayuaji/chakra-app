@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using ChakraApp.Application.Common;
 using ChakraApp.Domain.Entities.Enums;
 
-namespace  ChakraApp.Infrastruture.ApplicationDbContext;
+namespace ChakraApp.Infrastructure;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
     public ApplicationDbContext(DbContextOptions options) : base(options)
     {
