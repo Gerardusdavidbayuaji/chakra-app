@@ -20,7 +20,8 @@ public static class UserEndpoint
 
         group.MapPost("/", async (CreateUserRequestDto dto, IMediator mediator) =>
         {
-            var command = new CreateUserCommand(dto.Name, dto.Email, dto.Password, dto.TelegramChatId);
+            var command = new CreateUserCommand(dto.Name, dto.Email, dto.SupabaseAuthId, dto.TelegramChatId);
+
             var result = await mediator.Send(command);
             return result.IsSuccess
                 ? Results.Created($"/api/users/{result.Data!.Id}", result.Data)

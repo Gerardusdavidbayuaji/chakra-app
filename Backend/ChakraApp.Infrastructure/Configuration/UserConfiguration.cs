@@ -1,4 +1,4 @@
-using ChakraApp.Domain.Entities.Enums;
+using ChakraApp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,7 +16,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.Email).IsRequired().HasMaxLength(255);
         builder.HasIndex(x => x.Email).IsUnique();
         
-        builder.Property(x => x.Password).IsRequired();
+        builder.Property(x => x.SupabaseAuthId).IsRequired();
         
         builder.Property(x => x.TelegramChatId).HasMaxLength(100);
         
