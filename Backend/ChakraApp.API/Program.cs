@@ -10,7 +10,8 @@ builder.Services
     .AddMediatRSetup()
     .AddValidationSetup()
     .AddApplicationSetup()
-    .AddOpenApiSetup();
+    .AddOpenApiSetup()
+    .AddAuthSetup(builder.Configuration);
 
 var app = builder.Build();
 
@@ -20,9 +21,14 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
 }
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseOpenApiSetup();
 app.UseCors();
 
+app.MapAuthEndpoints();
 app.MapUserEndpoints();
+
 
 app.Run();

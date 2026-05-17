@@ -1,4 +1,4 @@
-using ChakraApp.Domain.Entities.Enums;
+using ChakraApp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChakraApp.Application.Common;
