@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ChakraApp.Application.Common;
-using ChakraApp.Domain.Entities.Enums;
+using ChakraApp.Domain.Entities;
 
 namespace ChakraApp.Infrastructure;
 

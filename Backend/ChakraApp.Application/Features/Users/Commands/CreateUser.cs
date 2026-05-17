@@ -1,6 +1,6 @@
 using ChakraApp.Application.Common;
 using ChakraApp.Application.Users.Dtos;
-using ChakraApp.Domain.Entities.Enums;
+using ChakraApp.Domain.Entities;
 using MediatR;
 
 namespace ChakraApp.Application.Features.Users.Commands;
@@ -8,7 +8,7 @@ namespace ChakraApp.Application.Features.Users.Commands;
 public record CreateUserCommand(
     string Name,
     string Email,
-    string Password,
+    string? SupabaseAuthId,
     string? TelegramChatId
 ) : IRequest<Result<UserResponseDto>>;
 
@@ -27,13 +27,12 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Resul
         if (emailExists)
             return Result<UserResponseDto>.Failure("Email sudah terdaftar.");
 
-        // TODO: ganti dengan password hashing yang proper (BCrypt / PBKDF2)
         var user = new User
         {
             Id = Guid.NewGuid(),
             Name = request.Name,
             Email = request.Email,
-            Password = request.Password,
+            SupabaseAuthId = request.SupabaseAuthId,
             TelegramChatId = request.TelegramChatId,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow
