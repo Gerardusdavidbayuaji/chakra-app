@@ -22,7 +22,7 @@ namespace ChakraApp.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ChakraApp.Domain.Entities.Enums.User", b =>
+            modelBuilder.Entity("ChakraApp.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,7 +43,7 @@ namespace ChakraApp.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("SupabaseAuthId")
                         .IsRequired()
                         .HasColumnType("text");
 
