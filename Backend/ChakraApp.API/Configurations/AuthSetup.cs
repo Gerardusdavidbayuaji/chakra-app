@@ -1,4 +1,3 @@
-using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using ChakraApp.Application.Common;
@@ -11,8 +10,7 @@ public static class AuthSetup
 {
     public static IServiceCollection AddAuthSetup(this IServiceCollection services, IConfiguration configuration)
     {
-        var jwtSecret = configuration["SupabaseAuth:JwtSecret"];
-        var issuer = configuration["SupabaseAuth:ValidIssuer"];
+        var authority = configuration["SupabaseAuth:Authority"];
         var audience = configuration["SupabaseAuth:ValidAudience"];
 
         services.AddAuthentication(options =>
@@ -22,20 +20,20 @@ public static class AuthSetup
             })
             .AddJwtBearer(options =>
             {
+                options.Authority = authority;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
-                    ValidIssuer = issuer,
+                    ValidIssuer = authority,
                     ValidateAudience = true,
                     ValidAudience = audience,
                     ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret!))
+                    ValidateIssuerSigningKey = true
                 };
             });
 
         services.AddAuthorization();
-        
+
         services.AddHttpContextAccessor();
         services.AddScoped<ICurrentUserService, CurrentUserService>();
 

@@ -11,7 +11,19 @@ public static class AuthEndpoint
 
         group.MapGet("/me", [Authorize] (ICurrentUserService currentUser) =>
         {
-            return Results.Ok(new { UserId = currentUser.UserId });
+            var user = currentUser.GetCurrentUser();
+            if (user == null)
+                return Results.Unauthorized();
+
+            return Results.Ok(new
+            {
+                user.Id,
+                user.Name,
+                user.Email,
+                user.SupabaseAuthId,
+                user.TelegramChatId,
+                user.CreatedAt
+            });
         })
         .WithName("GetMe");
     }
