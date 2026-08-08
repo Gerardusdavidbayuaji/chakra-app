@@ -1,5 +1,6 @@
 using ChakraApp.API.Configurations;
 using ChakraApp.API.Endpoints;
+using ChakraApp.API.Middlewares;
 using ChakraApp.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,14 +16,9 @@ builder.Services
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    db.Database.Migrate();
-}
-
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseMiddleware<EnsureUserMiddleware>();
 
 app.UseOpenApiSetup();
 app.UseCors();
