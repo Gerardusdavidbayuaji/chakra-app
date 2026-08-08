@@ -16,6 +16,9 @@ builder.Services
 
 var app = builder.Build();
 
+app.Logger.LogInformation("Environment: {Environment}", app.Environment.EnvironmentName);
+app.Logger.LogInformation("Application: {App}", app.Environment.ApplicationName);
+
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<EnsureUserMiddleware>();
