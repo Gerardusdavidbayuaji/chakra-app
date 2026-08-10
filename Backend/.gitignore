@@ -484,3 +484,7 @@ $RECYCLE.BIN/
 # Local environments and configuration
 appsettings.json
 appsettings.Development.json
+appsettings.Production.json
+appsettings.UAT.json
+
+.config
