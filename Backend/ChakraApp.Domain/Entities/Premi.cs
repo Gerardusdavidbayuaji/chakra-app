@@ -14,4 +14,5 @@ public class Premi
     public DateTime UpdatedAt { get; set; }
 
     public User User { get; set; } = null!;
+    public ICollection<Installment> Installments { get; set; } = new List<Installment>();
 }
