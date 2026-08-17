@@ -16,7 +16,13 @@ public class PremiConfiguration : IEntityTypeConfiguration<Premi>
             .HasColumnType("decimal(18,2)")
             .IsRequired();
 
+        builder.Property(x => x.InstallmentAmount)
+            .HasColumnType("decimal(18,2)")
+            .IsRequired();
+
         builder.Property(x => x.Tenor).IsRequired();
+        builder.Property(x => x.DueDay).IsRequired();
+        builder.Property(x => x.GracePeriodDays).IsRequired();
 
         builder.Property(x => x.StartDate).IsRequired();
 
