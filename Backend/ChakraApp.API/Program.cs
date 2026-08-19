@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using ChakraApp.API.Configurations;
 using ChakraApp.API.Endpoints;
 using ChakraApp.API.Middlewares;
@@ -5,6 +6,11 @@ using ChakraApp.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 builder.Services
     .AddPersistence(builder.Configuration)
@@ -28,6 +34,7 @@ app.UseCors();
 
 app.MapAuthEndpoints();
 app.MapUserEndpoints();
-
+app.MapPremiEndpoints();
+app.MapInstallmentEndpoints();
 
 app.Run();
