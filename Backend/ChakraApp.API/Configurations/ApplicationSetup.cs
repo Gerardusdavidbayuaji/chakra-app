@@ -1,3 +1,5 @@
+using ChakraApp.Application.Services;
+
 namespace ChakraApp.API.Configurations;
 
 public static class ApplicationSetup
@@ -5,6 +7,7 @@ public static class ApplicationSetup
     public static IServiceCollection AddApplicationSetup(this IServiceCollection services)
     {
         services.AddEndpointsApiExplorer();
+        services.AddScoped<PremiCompletionService>();
 
         services.AddCors(options =>
         {

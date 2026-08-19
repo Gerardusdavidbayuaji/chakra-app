@@ -1,4 +1,5 @@
 using ChakraApp.Application;
+using ChakraApp.Application.Common.Behaviors;
 
 namespace ChakraApp.API.Configurations;
 
@@ -9,6 +10,7 @@ public static class MediatRSetup
         services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssembly(typeof(ApplicationAssemblyReference).Assembly);
+            cfg.AddOpenBehavior(typeof(ValidationResultPipelineBehavior<,>));
         });
 
         return services;
