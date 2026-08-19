@@ -9,6 +9,7 @@ public interface IApplicationDbContext
     DbSet<Premi> Premi { get; }
     DbSet<Installment> Installments { get; }
     DbSet<OutboxMessage> OutboxMessages { get; }
+    DbSet<AuditLog> AuditLogs { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
