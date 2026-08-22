@@ -20,6 +20,13 @@ public class OutboxMessageConfiguration : IEntityTypeConfiguration<OutboxMessage
             .IsRequired()
             .HasColumnType("jsonb");
 
+        builder.Property(x => x.IsProcessed)
+            .HasDefaultValue(false);
+
+        builder.Property(x => x.RetryCount)
+            .HasDefaultValue(0);
+
+        builder.HasIndex(x => x.IsProcessed);
         builder.HasIndex(x => x.ProcessedAt);
 
         builder.Property(x => x.CreatedAt)
