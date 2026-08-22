@@ -16,7 +16,7 @@ builder.Services
     .AddPersistence(builder.Configuration)
     .AddMediatRSetup()
     .AddValidationSetup()
-    .AddApplicationSetup()
+    .AddApplicationSetup(builder.Configuration)
     .AddOpenApiSetup()
     .AddAuthSetup(builder.Configuration);
 
@@ -36,5 +36,6 @@ app.MapAuthEndpoints();
 app.MapUserEndpoints();
 app.MapPremiEndpoints();
 app.MapInstallmentEndpoints();
+app.MapMidtransWebhookEndpoints();
 
 app.Run();
