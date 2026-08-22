@@ -1,8 +1,8 @@
 using ChakraApp.Domain.Entities.Enums;
 
-namespace ChakraApp.Domain.Entities;
+namespace ChakraApp.Application.Features.Installments.Dtos;
 
-public class Installment
+public class InstallmentResponseDto
 {
     public Guid Id { get; set; }
     public Guid PremiId { get; set; }
@@ -13,8 +13,5 @@ public class Installment
     public int ReminderCount { get; set; }
     public string? MidtransOrderId { get; set; }
     public DateTime? PaidAt { get; set; }
-    public uint RowVersion { get; set; }
     public DateTime CreatedAt { get; set; }
-
-    public Premi Premi { get; set; } = null!;
 }

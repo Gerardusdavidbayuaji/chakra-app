@@ -14,6 +14,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<Premi> Premi { get; set; }
     public DbSet<Installment> Installments { get; set; }
     public DbSet<OutboxMessage> OutboxMessages { get; set; }
+    public DbSet<AuditLog> AuditLogs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
