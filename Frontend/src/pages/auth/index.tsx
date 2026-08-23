@@ -15,28 +15,32 @@ import {
 } from "@/components/ui/card";
 
 const AuthPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const { login } = useAuth();
+
+  const { login, signup } = useAuth();
   const navigate = useNavigate();
 
-  const handleAuth = () => {
+  const handleAuth = async () => {
     setError("");
+    setIsLoading(true);
+
+    const { error } = isLogin
+      ? await login(email, password)
+      : await signup(email, password);
+
+    setIsLoading(false);
+
+    if (error) {
+      setError(error);
+      return;
+    }
 
     if (isLogin) {
-      if (email === "admin@mail.com" && password === "admin12345") {
-        login(email, "admin");
-        navigate("/dashboard");
-      } else if (email === "user@mail.com" && password === "user54321") {
-        login(email, "user");
-        navigate("/");
-      } else {
-        setError("Invalid email or password");
-      }
-    } else {
-      setError("Registration is limited in this demo. Try logging in.");
+      navigate("/");
     }
   };
 
@@ -53,17 +57,12 @@ const AuthPage = () => {
               : "Enter your details below to get started"}
           </CardDescription>
         </CardHeader>
+
         <CardContent className="space-y-4">
           {error && (
             <div className="p-2 text-xs font-medium text-red-500 bg-red-50 rounded border border-red-100">
               {error}
             </div>
-          )}
-          {!isLogin && (
-            <Field>
-              <FieldLabel>Full Name</FieldLabel>
-              <Input placeholder="John Doe" />
-            </Field>
           )}
           <Field>
             <FieldLabel>Email</FieldLabel>
@@ -83,19 +82,15 @@ const AuthPage = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Field>
-          {!isLogin && (
-            <Field>
-              <FieldLabel>Confirm Password</FieldLabel>
-              <Input type="password" placeholder="••••••••" />
-            </Field>
-          )}
           <Button
             onClick={handleAuth}
+            disabled={isLoading}
             className="w-full h-10 mt-2 font-semibold tracking-wide"
           >
             {isLogin ? "Sign In" : "Sign Up"}
           </Button>
         </CardContent>
+
         <CardFooter className="flex flex-col space-y-4 text-center">
           <div className="text-sm text-gray-500">
             {isLogin ? "Don't have an account? " : "Already have an account? "}

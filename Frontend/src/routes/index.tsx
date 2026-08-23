@@ -17,7 +17,7 @@ export default function Routes() {
     {
       path: "/",
       element: (
-        <ProtectedRoute allowedRoles={["user"]}>
+        <ProtectedRoute>
           <HomePage />
         </ProtectedRoute>
       ),
@@ -29,7 +29,7 @@ export default function Routes() {
     {
       path: "/dashboard",
       element: (
-        <ProtectedRoute allowedRoles={["admin"]}>
+        <ProtectedRoute>
           <AdminPage />
         </ProtectedRoute>
       ),
@@ -37,7 +37,7 @@ export default function Routes() {
     {
       path: "/installments",
       element: (
-        <ProtectedRoute allowedRoles={["admin"]}>
+        <ProtectedRoute>
           <InstallmentsPage />
         </ProtectedRoute>
       ),
@@ -45,7 +45,7 @@ export default function Routes() {
     {
       path: "/premium-plan",
       element: (
-        <ProtectedRoute allowedRoles={["admin"]}>
+        <ProtectedRoute>
           <PremiumPlanPage />
         </ProtectedRoute>
       ),
@@ -53,7 +53,7 @@ export default function Routes() {
     {
       path: "/premium-plan/:planId",
       element: (
-        <ProtectedRoute allowedRoles={["admin"]}>
+        <ProtectedRoute>
           <CustomersPage />
         </ProtectedRoute>
       ),
@@ -61,7 +61,7 @@ export default function Routes() {
     {
       path: "/reports",
       element: (
-        <ProtectedRoute allowedRoles={["admin"]}>
+        <ProtectedRoute>
           <ReportsPage />
         </ProtectedRoute>
       ),
