@@ -1,53 +1,76 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import type { Session } from "@supabase/supabase-js";
 import type { ReactNode } from "react";
 
-type Role = "admin" | "user" | null;
+import { supabase } from "@/utils/supabase";
 
 interface AuthContextType {
   user: string | null;
-  role: Role;
+  session: Session | null;
   isAuthenticated: boolean;
-  login: (email: string, role: Role) => void;
-  logout: () => void;
+  isLoading: boolean;
+  login: (email: string, password: string) => Promise<{ error: string | null }>;
+  signup: (
+    email: string,
+    password: string,
+  ) => Promise<{ error: string | null }>;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<string | null>(null);
-  const [role, setRole] = useState<Role>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const savedUser = localStorage.getItem("auth_user");
-    const savedRole = localStorage.getItem("auth_role") as Role;
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user.email ?? null);
+      setIsLoading(false);
+    });
 
-    if (savedUser && savedRole) {
-      setUser(savedUser);
-      setRole(savedRole);
-      setIsAuthenticated(true);
-    }
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      setUser(session?.user.email ?? null);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
-  const login = (email: string, role: Role) => {
-    setUser(email);
-    setRole(role);
-    setIsAuthenticated(true);
-    localStorage.setItem("auth_user", email);
-    localStorage.setItem("auth_role", role as string);
+  const login = async (email: string, password: string) => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    return { error: error?.message ?? null };
   };
 
-  const logout = () => {
-    setUser(null);
-    setRole(null);
-    setIsAuthenticated(false);
-    localStorage.removeItem("auth_user");
-    localStorage.removeItem("auth_role");
+  const signup = async (email: string, password: string) => {
+    const { error } = await supabase.auth.signUp({ email, password });
+    return { error: error?.message ?? null };
+  };
+
+  const logout = async () => {
+    await supabase.auth.signOut();
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, role, isAuthenticated, login, logout }}
+      value={{
+        user,
+        session,
+        isAuthenticated: !!session,
+        isLoading,
+        login,
+        signup,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>
@@ -56,8 +79,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
+  if (!context) throw new Error("useAuth must be used within AuthProvider");
   return context;
 };
