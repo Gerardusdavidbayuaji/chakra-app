@@ -1,8 +1,11 @@
-using ChakraApp.Application.Common;
 using ChakraApp.Application.Features.Premi.Dtos;
+using ChakraApp.Domain.Entities.Enums;
 using ChakraApp.Application.Mappers;
-using MediatR;
+using ChakraApp.Application.Common;
 using Microsoft.EntityFrameworkCore;
+using MediatR;
+using Mapster;
+
 
 namespace ChakraApp.Application.Features.Premi.Queries;
 
@@ -21,11 +24,27 @@ public class GetPremiByIdQueryHandler : IRequestHandler<GetPremiByIdQuery, Resul
     {
         var premi = await _context.Premi
             .AsNoTracking()
+            .Include(p => p.Installments)
             .FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken);
 
         if (premi == null)
             return Result<PremiResponseDto>.Failure("Premi tidak ditemukan.");
+        
+        var installmentsPaid = premi.Installments
+            .Count(i => i.Status == InstallmentStatus.Paid);
 
-        return Result<PremiResponseDto>.Success(premi.ToResponseDto());
+        var paidAmount = premi.InstallmentAmount * installmentsPaid;
+
+        var nextDue = premi.Installments
+            .Where(i => i.Status != InstallmentStatus.Paid)
+            .OrderBy(i => i.DueDate)
+            .FirstOrDefault();
+        
+        var dto = premi.Adapt<PremiResponseDto>();
+        dto.InstallmentsPaid = installmentsPaid;
+        dto.RemainingAmount = premi.TotalAmount - paidAmount;
+        dto.NextDueDate = nextDue?.DueDate;
+        
+        return Result<PremiResponseDto>.Success(dto);
     }
 }
