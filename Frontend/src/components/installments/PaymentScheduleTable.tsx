@@ -8,11 +8,10 @@ import {
   TableRow,
   TableCell,
 } from "@/components/ui/table";
+import type { IPayment } from "@/utils/apis/installments";
+import { payments } from "@/utils/apis/installments/sample-data";
 
 import { formatDate, formatCurrency } from "@/utils/formatter";
-
-import { payments } from "@/utils/apis/installments";
-import type { IPayment } from "@/utils/apis/installments";
 
 const getStatusColor = (status: string) => {
   switch (status) {

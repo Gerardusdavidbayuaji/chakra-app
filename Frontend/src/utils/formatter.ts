@@ -10,6 +10,18 @@ export const formatDate = (date: string | Date): string => {
   return `${day}-${month}-${year}`;
 };
 
+export const formatDateLong = (date: string | null): string => {
+  if (!date) return "N/A";
+  const value = new Date(date);
+  if (isNaN(value.getTime())) return "N/A";
+
+  return value.toLocaleDateString("id-ID", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};
+
 export const formatCurrency = (amount: number): string => {
   if (amount === undefined || amount === null) return "Rp 0,00";
 

@@ -1,5 +1,8 @@
-import type { IPayment } from "./type";
-import { payments } from "./sample-data";
+export type {
+  IInstallmentItem,
+  InstallmentStatus,
+  IPaginatedResult,
+  IPayment,
+} from "./types";
 
-export type { IPayment };
-export { payments };
+export { getInstallmentsByPremiId } from "./api";
