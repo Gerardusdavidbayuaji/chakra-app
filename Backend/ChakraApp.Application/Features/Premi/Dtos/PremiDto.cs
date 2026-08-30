@@ -35,4 +35,8 @@ public class PremiResponseDto
     public PremiStatus Status { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
+    public int InstallmentsPaid { get; set; }
+    public decimal RemainingAmount { get; set; }
+    public DateOnly? NextDueDate { get; set; }
+    
 }

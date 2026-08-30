@@ -1,4 +1,4 @@
-import type { IPayment } from "./type";
+import type { IPayment } from "./types";
 
 export const payments: IPayment[] = [
   {
